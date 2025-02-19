@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Introduccion</string>
     <string name="coca_cola">Coca-cola</string>
@@ -10,5 +11,4 @@
     <string name="soy_del_rango_de_edad_permitido">Soy del rango de edad permitido.</string>
     <string name="nombre_y_apellidos">Nombre y apellidos</string>
     <string name="resultado">Resultado</string>
-    <string name="_0" translatable="false">0</string>
 </resources>

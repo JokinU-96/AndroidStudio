@@ -11,9 +11,9 @@
         android:id="@+id/bCalcular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="COMPRAR"
+        android:text="@string/comprar"
         app:cornerRadius="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvResultado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llPrincipal"
@@ -23,7 +23,7 @@
         android:id="@+id/sEdad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Soy del rango de edad permitido."
+        android:text="@string/soy_del_rango_de_edad_permitido"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,10 +33,11 @@
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="41dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Nombre y apellidos"
+        android:padding="10dp"
+        android:text="@string/nombre_y_apellidos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/sEdad"
         app:layout_constraintVertical_bias="0.10">
         <LinearLayout
+            android:id="@+id/llcocacola"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -61,12 +63,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/tvCocacola"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Coca-cola"/>
+                android:padding="5dp"
+                android:text="@string/coca_cola" />
 
             <EditText
                 android:id="@+id/edCocacola"
@@ -74,10 +78,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint='@string/_0'/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llkaslimon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -85,12 +91,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/tvKasLimon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Kas Limon"/>
+                android:padding="5dp"
+                android:text="@string/kas_limon" />
 
             <EditText
                 android:id="@+id/edKasLimon"
@@ -98,10 +106,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint="0"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llkasnaranja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -109,12 +119,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/tvKasNaranja"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Kas Naranja"/>
+                android:padding="5dp"
+                android:text="@string/kas_naranja" />
 
             <EditText
                 android:id="@+id/edKAsNaranja"
@@ -122,9 +134,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint="0"/>
         </LinearLayout>
         <LinearLayout
+
+            android:id="@+id/llredbull"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -132,12 +147,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/tvRedBull"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Red Bull"/>
+                android:padding="5dp"
+                android:text="@string/red_bull" />
 
             <EditText
                 android:id="@+id/edRedBull"
@@ -145,7 +162,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint="0"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -155,12 +173,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/tvCerveza"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cerveza"/>
+                android:padding="5dp"
+                android:text="@string/cerveza" />
 
             <EditText
                 android:id="@+id/edCerveza"
@@ -168,7 +188,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint="0"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -178,12 +199,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/tvVino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Vino"/>
+                android:padding="5dp"
+                android:text="@string/vino" />
 
             <EditText
                 android:id="@+id/edVino"
@@ -191,9 +214,21 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint="0"/>
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resultado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bCalcular"
+        tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
