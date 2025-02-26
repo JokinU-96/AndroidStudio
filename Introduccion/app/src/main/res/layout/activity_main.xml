@@ -37,7 +37,7 @@
         android:ems="10"
         android:inputType="text"
         android:padding="10dp"
-        android:text="@string/nombre_y_apellidos"
+        android:hint="@string/nombre_y_apellidos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +129,7 @@
                 android:text="@string/kas_naranja" />
 
             <EditText
-                android:id="@+id/edKAsNaranja"
+                android:id="@+id/edKasNaranja"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
