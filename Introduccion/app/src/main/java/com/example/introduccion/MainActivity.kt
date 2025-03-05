@@ -1,5 +1,7 @@
 package com.example.introduccion
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -7,11 +9,19 @@ import android.widget.Checkable
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
+    private val startActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data?.getStringExtra("datos") ?:"nulo"
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     mayorDeEdad = true
                 }
             }
-            if (cervezaN != null){3
+            if (cervezaN != null){
                 if (cervezaN > 0){
                     mayorDeEdad = true
                 }
@@ -55,21 +65,27 @@ class MainActivity : AppCompatActivity() {
 
             if (validar(mayorDeEdad)){
                 var resultado = 0;
+                var sb = StringBuilder()
+                var c = 0;
 
                 for (cantidad in cantidades){
                     if (cantidad != null){
                         resultado += cantidad
+                        if(c != 0){
+                            sb.append(" + ").append(cantidad)
+                        }else{
+                            sb.append(cantidad)
+                        }
+                        c += 1
                     }
                 }
+                sb.append(" = ").append(resultado)
 
-                findViewById<TextView>(R.id.tvResultado).text = resultado.toString();
+                findViewById<TextView>(R.id.tvResultado).text = sb.toString();
 
-                /*if (cocacolaN != null && kaslimonN != null && kasnaranjaN != null && redbullN != null && cervezaN != null && vinoN != null){
-                    resultado = cocacolaN + kaslimonN + kasnaranjaN + redbullN + cervezaN + vinoN;
-                    findViewById<TextView>(R.id.tvResultado).setText(resultado);
-                }else{
-                    findViewById<TextView>(R.id.tvResultado).setText("No se pudo calcular el resultado por insertar valores nulos o erroneos.")
-                }*/
+                val intent:Intent = Intent(this, ej2::class.java)
+                intent.putExtra("resultado", sb.toString())
+                startActivity(intent)
             }
         }
     }

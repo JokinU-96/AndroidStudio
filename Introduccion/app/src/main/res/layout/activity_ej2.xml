@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="76dp"
         android:text="@string/textview"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +22,7 @@
         android:id="@+id/bPagar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/validar"
+        android:text="@string/pagar"
         app:cornerRadius="1dp"
         app:layout_constraintBottom_toTopOf="@+id/tvResultado"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +37,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bPagar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65999997">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <LinearLayout
@@ -54,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="@string/nombre_y_apellidos"
+                android:hint="@string/nombre_y_apellidos"
                 android:textAlignment="textEnd"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
@@ -64,7 +62,7 @@
                 android:id="@+id/etNumeroTarjeta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/n_mero_de_tarjeta"
+                android:hint="@string/n_mero_de_tarjeta"
                 android:textAlignment="textEnd"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
@@ -80,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/mes"
+                    android:hint="@string/mes"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
@@ -90,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/anyo"
+                    android:hint="@string/anyo"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
@@ -100,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/CVV"
+                    android:hint="@string/CVV"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
