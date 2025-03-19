@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.Toast
+import androidx.core.view.forEach
 import androidx.navigation.fragment.findNavController
 import com.example.ej4.databinding.FragmentThirdBinding
+import com.example.ej4.modelo.Vehiculo
 
 
 class ThirdFragment : Fragment() {
@@ -41,6 +44,21 @@ class ThirdFragment : Fragment() {
             //Agrega el CheckBox al LinearLayout
             binding.llVehiculos.addView(checkBox)
         }
+
+        var vehiculosComprados = ""
+
+        binding.btnComprar.setOnClickListener{
+            binding.llVehiculos.forEach { control ->
+                if (control is CheckBox){
+                    vehiculosComprados += "${control.text}\n"
+                    (activity as MainActivity).usuario?.vehiculos?.add((activity as MainActivity).vehiculos.get(control.id))
+                }
+            }
+
+            Toast.makeText(context, vehiculosComprados, Toast.LENGTH_LONG).show()
+        }
+
+
     }
 
     override fun onDestroyView() {

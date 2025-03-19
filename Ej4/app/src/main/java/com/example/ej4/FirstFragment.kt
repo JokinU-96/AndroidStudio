@@ -1,6 +1,7 @@
 package com.example.ej4
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +37,10 @@ class FirstFragment : Fragment() {
         }
         binding.btnComprar.setOnClickListener{
             findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
+        }
+
+        if((activity as MainActivity).usuario != null){
+            binding.saludo.text = (activity as MainActivity).usuario?.nombre
         }
 
     }

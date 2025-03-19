@@ -55,6 +55,7 @@ class SecondFragment : Fragment() {
                     if (edad > 18) {
                         findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
                         var usuarioActual = Usuario(binding.etNombre.text.toString(), binding.etApellidos.text.toString(), edad)
+                        (activity as MainActivity).usuario = usuarioActual
 
                     } else {
                         Toast.makeText(context, "Debes ser mayor de edad para poder comprarte un coche en este concesionario.", Toast.LENGTH_SHORT)
