@@ -49,4 +49,7 @@
     <string name="comprar">Comprar</string>
     <string name="bienvenida_a_mi_concesionario">¡Bienvenida a mi concesionario!</string>
     <string name="red_car_image">Red car image</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="edad">Edad</string>
 </resources>
