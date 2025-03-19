@@ -23,7 +23,6 @@
         android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginEnd="3dp"
         android:contentDescription="@string/red_car_image"
         android:src="@drawable/red_car"
         app:layout_constraintBottom_toBottomOf="@+id/botones"
