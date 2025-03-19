@@ -26,7 +26,7 @@
         android:contentDescription="@string/red_car_image"
         android:src="@drawable/red_car"
         app:layout_constraintBottom_toBottomOf="@+id/botones"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saludo" />
 
