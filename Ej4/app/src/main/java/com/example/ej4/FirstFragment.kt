@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.ej4.databinding.FragmentFirstBinding
 
@@ -29,6 +30,13 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnInsertarDatos.setOnClickListener{
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+        binding.btnComprar.setOnClickListener{
+            findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
+        }
 
     }
 

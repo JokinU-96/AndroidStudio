@@ -52,4 +52,6 @@
     <string name="nombre">Nombre</string>
     <string name="apellidos">Apellidos</string>
     <string name="edad">Edad</string>
+    <string name="fragment_third">Third Fragment</string>
+    <string name="insertar">Insertar</string>
 </resources>
