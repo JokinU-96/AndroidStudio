@@ -10,17 +10,24 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.example.ej4.databinding.ActivityMainBinding
+import com.example.ej4.modelo.Usuario
+import com.example.ej4.modelo.Vehiculo
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    var usuario: Usuario? = null
+    var vehiculos: MutableList<Vehiculo> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        insertarVehiculos()
 
         setSupportActionBar(binding.toolbar)
 
@@ -33,6 +40,15 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
         }
+    }
+
+    fun insertarVehiculos(){
+        vehiculos.add(Vehiculo("moto", "Dukati", 1250.00))
+        vehiculos.add(Vehiculo("moto", "Kawasaki", 890.00))
+        vehiculos.add(Vehiculo("moto", "BMW", 980.00))
+        vehiculos.add(Vehiculo("coche", "Nissan", 2500.00))
+        vehiculos.add(Vehiculo("coche", "Renault", 9800.00))
+        vehiculos.add(Vehiculo("coche", "Peugeot", 15000.00))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

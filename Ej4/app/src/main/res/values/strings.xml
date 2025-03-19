@@ -47,7 +47,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="insertar_datos">Insertar Datos</string>
     <string name="comprar">Comprar</string>
-    <string name="bienvenida_a_mi_concesionario">¡Bienvenida a mi concesionario!</string>
+    <string name="bienvenida_a_mi_concesionario">¡Bienvenida/o a mi concesionario!</string>
     <string name="red_car_image">Red car image</string>
     <string name="nombre">Nombre</string>
     <string name="apellidos">Apellidos</string>
