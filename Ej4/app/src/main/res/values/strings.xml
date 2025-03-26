@@ -55,4 +55,7 @@
     <string name="fragment_third">Third Fragment</string>
     <string name="insertar">Insertar</string>
     <string name="volver">Volver</string>
+    <string name="ver_veh_culo">Ver vehículo</string>
+    <string name="marca">Marca</string>
+    <string name="cilindrada">Cilindrada</string>
 </resources>

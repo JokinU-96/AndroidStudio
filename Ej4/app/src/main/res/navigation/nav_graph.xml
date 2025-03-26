@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_ThirdFragment"
             app:destination="@id/ThirdFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_fourthFragment"
+            app:destination="@id/fourthFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -36,5 +39,14 @@
         <action
             android:id="@+id/action_ThirdFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fourthFragment"
+        android:name="com.example.ej4.FourthFragment"
+        android:label="fragment_fourth"
+        tools:layout="@layout/fragment_fourth" >
+        <action
+            android:id="@+id/action_fourthFragment_to_ThirdFragment"
+            app:destination="@id/ThirdFragment" />
     </fragment>
 </navigation>
