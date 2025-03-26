@@ -54,4 +54,5 @@
     <string name="edad">Edad</string>
     <string name="fragment_third">Third Fragment</string>
     <string name="insertar">Insertar</string>
+    <string name="volver">Volver</string>
 </resources>

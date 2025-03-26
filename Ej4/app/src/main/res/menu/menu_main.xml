@@ -3,8 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.ej4.MainActivity">
     <item
-        android:id="@+id/action_settings"
         android:orderInCategory="100"
+        android:title="Item" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="101"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_volver"
+        android:orderInCategory="102"
+        android:title="@string/volver"
+        app:showAsAction="never"/>
 </menu>
