@@ -43,20 +43,23 @@ class FourthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        posicion=arguments?.getInt("position") ?: -1
-        val vehiculo: Vehiculo
+        var posicion = arguments?.getInt("position") ?: -1
+
         if (posicion==-1) findNavController().popBackStack()
         else{
-            vehiculo=(activity as MainActivity).vehiculos[posicion]
-            binding.fofEtTipo.setText(vehiculo.tipoVehiculo)
-            binding.foEtCilindrada.setText(vehiculo.cilindradaVehiculo.toString())
-            binding.fofEtMarca.setText(vehiculo.marcaVehiculo)
+            var vehiculo=(activity as MainActivity).miViewModel.vehiculos[posicion]
+            //binding.etTipo.setText(vehiculo.tipoVehiculo)
+            binding.etCilindrada.setText(vehiculo.cilindradaVehiculo.toString())
+            binding.etMarca.setText(vehiculo.marcaVehiculo)
         }
 
-        binding.fofBComprar.setOnClickListener{
+        binding.btnComprar.setOnClickListener{
             comprar()
         }
 
+    }
+
+    fun comprar(){
     }
 
     override fun onDestroyView() {

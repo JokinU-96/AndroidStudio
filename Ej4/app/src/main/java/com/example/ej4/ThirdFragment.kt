@@ -38,7 +38,7 @@ class ThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvVehiculos.layoutManager= LinearLayoutManager(context)
-        binding.rvVehiculos.adapter= Adaptador((activity as MainActivity).vehiculos)
+        binding.rvVehiculos.adapter= Adaptador((activity as MainActivity).miViewModel.vehiculos)
 
 //        binding.btnComprar.setOnClickListener{
 //            binding.llVehiculos.forEach { control ->

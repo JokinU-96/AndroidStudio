@@ -1,5 +1,7 @@
 package com.example.ej4
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +11,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
 import com.example.ej4.databinding.ActivityMainBinding
 import com.example.ej4.modelo.Usuario
+import com.example.ej4.modelo.VM
 import com.example.ej4.modelo.Vehiculo
 
 class MainActivity : AppCompatActivity() {
@@ -18,10 +23,26 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    var usuario: Usuario? = null
-    var vehiculos: MutableList<Vehiculo> = mutableListOf()
+    //var usuario: Usuario? = null
+    //var vehiculos: MutableList<Vehiculo> = mutableListOf()
+
+    val miViewModel: VM by viewModels()
+
+    lateinit var datos:SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        datos= this.getSharedPreferences("datos", Context.MODE_PRIVATE)
+        if(!datos.getString("nombre", "").isNullOrEmpty()){
+            val usuarioPrecargado = Usuario(
+                datos.getString("nombre", "").toString(),
+                datos.getString("apellidos", "").toString(),
+                datos.getInt("edad", 0)
+            )
+            miViewModel.usuario = usuarioPrecargado
+        }
+
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,12 +58,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun insertarVehiculos(){
-        vehiculos.add(Vehiculo("moto", "Dukati", 1250.00))
-        vehiculos.add(Vehiculo("moto", "Kawasaki", 890.00))
-        vehiculos.add(Vehiculo("moto", "BMW", 980.00))
-        vehiculos.add(Vehiculo("coche", "Nissan", 2500.00))
-        vehiculos.add(Vehiculo("coche", "Renault", 9800.00))
-        vehiculos.add(Vehiculo("coche", "Peugeot", 15000.00))
+        miViewModel.vehiculos.add(Vehiculo("moto", "Dukati", 1250.00))
+        miViewModel.vehiculos.add(Vehiculo("moto", "Kawasaki", 890.00))
+        miViewModel.vehiculos.add(Vehiculo("moto", "BMW", 980.00))
+        miViewModel.vehiculos.add(Vehiculo("coche", "Nissan", 2500.00))
+        miViewModel.vehiculos.add(Vehiculo("coche", "Renault", 9800.00))
+        miViewModel.vehiculos.add(Vehiculo("coche", "Peugeot", 15000.00))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
