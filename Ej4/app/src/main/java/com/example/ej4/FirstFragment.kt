@@ -42,8 +42,8 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
         }
 
-        if((activity as MainActivity).usuario != null){
-            binding.saludo.text = (activity as MainActivity).usuario?.nombre
+        if((activity as MainActivity).miViewModel.usuario != null){
+            binding.saludo.text = (activity as MainActivity).miViewModel.usuario?.nombre
         }
 
     }

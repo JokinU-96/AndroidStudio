@@ -1,5 +1,7 @@
 package com.example.ej4
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,6 +21,10 @@ class SecondFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,13 +36,15 @@ class SecondFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
         super.onViewCreated(view, savedInstanceState)
+        val editor: SharedPreferences.Editor =(activity as MainActivity).datos.edit()
 
-        binding.btnInsertar.setOnClickListener{
+        binding.etNombre.setText((activity as MainActivity).miViewModel.usuario?.nombre.toString())
+
+            binding.btnInsertar.setOnClickListener{
             try {
-
-
-
                 if (binding.etNombre.text.isNullOrEmpty()) {
                     Toast.makeText(context, "Por favor introduzca su nombre.", Toast.LENGTH_SHORT)
                         .show()
@@ -53,10 +61,12 @@ class SecondFragment : Fragment() {
                     val edadText = binding.etEdad.text.toString()
                     val edad = edadText.toInt()
                     if (edad > 18) {
-                        findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
                         var usuarioActual = Usuario(binding.etNombre.text.toString(), binding.etApellidos.text.toString(), edad)
-                        (activity as MainActivity).usuario = usuarioActual
-
+                        (activity as MainActivity).miViewModel.usuario = usuarioActual
+                        editor.putInt("edad", edad)
+                        editor.putString("usario", binding.etNombre.text.toString())
+                        editor.putString("apellidos", binding.etApellidos.text.toString())
+                        findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
                     } else {
                         Toast.makeText(context, "Debes ser mayor de edad para poder comprarte un coche en este concesionario.", Toast.LENGTH_SHORT)
                             .show()
