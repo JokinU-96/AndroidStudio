@@ -38,7 +38,15 @@ class ThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvVehiculos.layoutManager= LinearLayoutManager(context)
-        binding.rvVehiculos.adapter= Adaptador((activity as MainActivity).miViewModel.vehiculos)
+
+        if ((activity as MainActivity).miViewModel.usuario?.edad!! <= 18){
+            //Cargar solo las motos
+            val vehiculosParaMenores = mutableListOf<Vehiculo>()
+            (activity as MainActivity).miViewModel.vehiculos.filterTo(vehiculosParaMenores) { it.tipoVehiculo == "moto" }
+            binding.rvVehiculos.adapter= Adaptador(vehiculosParaMenores)
+        } else{
+            binding.rvVehiculos.adapter= Adaptador((activity as MainActivity).miViewModel.vehiculos)
+        }
 
 //        binding.btnComprar.setOnClickListener{
 //            binding.llVehiculos.forEach { control ->

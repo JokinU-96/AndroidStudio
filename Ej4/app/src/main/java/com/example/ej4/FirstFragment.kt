@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.navigation.fragment.findNavController
 import com.example.ej4.databinding.FragmentFirstBinding
@@ -39,7 +40,12 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
         binding.btnComprar.setOnClickListener{
-            findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
+            if((activity as MainActivity).miViewModel.usuario == null) {
+                Toast.makeText(context, "Debes hacer el login antes de comprar un vehículo.", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
+            }
         }
 
         if((activity as MainActivity).miViewModel.usuario != null){

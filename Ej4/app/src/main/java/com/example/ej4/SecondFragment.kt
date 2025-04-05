@@ -21,10 +21,6 @@ class SecondFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,7 +56,7 @@ class SecondFragment : Fragment() {
                 } else {
                     val edadText = binding.etEdad.text.toString()
                     val edad = edadText.toInt()
-                    if (edad > 18) {
+                    if (edad >= 16) {
                         var usuarioActual = Usuario(binding.etNombre.text.toString(), binding.etApellidos.text.toString(), edad)
                         (activity as MainActivity).miViewModel.usuario = usuarioActual
                         editor.putInt("edad", edad)
