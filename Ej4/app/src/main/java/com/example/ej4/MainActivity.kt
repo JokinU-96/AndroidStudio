@@ -48,22 +48,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        insertarVehiculos()
+        miViewModel.insertarVehiculos()
 
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    fun insertarVehiculos(){
-        miViewModel.vehiculos.add(Vehiculo("moto", "Dukati", 1250.00))
-        miViewModel.vehiculos.add(Vehiculo("moto", "Kawasaki", 890.00))
-        miViewModel.vehiculos.add(Vehiculo("moto", "BMW", 980.00))
-        miViewModel.vehiculos.add(Vehiculo("coche", "Nissan", 2500.00))
-        miViewModel.vehiculos.add(Vehiculo("coche", "Renault", 9800.00))
-        miViewModel.vehiculos.add(Vehiculo("coche", "Peugeot", 15000.00))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

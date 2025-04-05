@@ -18,7 +18,7 @@ class Adaptador(var vehiculos: MutableList<Vehiculo>):RecyclerView.Adapter<Adapt
             binding.rviVerVehiculo.setOnClickListener{
                 val miBundle = bundleOf("posicion" to posicion)
                 //Llevo al usuario a la ventana donde se muestr más información sobre el vehículo.
-                binding.rviVerVehiculo.findNavController().navigate(R.id.action_fourthFragment_to_ThirdFragment /*De donde a donde va*/, miBundle/*miBundle*/)
+                binding.rviVerVehiculo.findNavController().navigate(R.id.action_ThirdFragment_to_FourthFragment/*De donde a donde va*/, miBundle/*miBundle*/)
             }
         }
     }
