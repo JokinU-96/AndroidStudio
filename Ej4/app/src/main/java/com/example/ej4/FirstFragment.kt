@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.navigation.fragment.findNavController
 import com.example.ej4.databinding.FragmentFirstBinding
 
@@ -16,6 +20,8 @@ import com.example.ej4.databinding.FragmentFirstBinding
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
+
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -52,6 +58,38 @@ class FirstFragment : Fragment() {
             binding.saludo.text = (activity as MainActivity).miViewModel.usuario?.nombre
         }
 
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    val menuHost: MenuHost = requireActivity()
+
+    menuHost.addMenuProvider(object: MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        // Add menu items here
+            menuInflater.inflate(R.menu.menu_fragment1, menu)
+        }
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        // Handle the menu selection
+            return when (menuItem.itemId) {
+                R.id.saludo -> {
+                    Toast.makeText(context, "Hola", Toast.LENGTH_LONG).show()
+                    true
+                }
+                else -> false
+            }
+        }
+    },viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+    override fun onPrepareMenu(menu: Menu) {
+        super.onPrepareMenu(menu)
+        menu.findItem(R.id.miHola)?.isVisible=false
     }
 
     override fun onDestroyView() {
