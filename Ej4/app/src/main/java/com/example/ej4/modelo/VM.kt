@@ -7,6 +7,8 @@ class VM:ViewModel() {
     var vehiculos: MutableList<Vehiculo> = mutableListOf()
     var usuario: Usuario? = null
 
+    var vehiculoComprado: Vehiculo? = null
+
     fun insertarVehiculos(){
         vehiculos.add(Vehiculo("moto", "Dukati", 1250.00))
         vehiculos.add(Vehiculo("moto", "Kawasaki", 890.00))

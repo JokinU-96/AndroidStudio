@@ -54,6 +54,14 @@ class FirstFragment : Fragment() {
             }
         }
 
+        if((activity as MainActivity).miViewModel.vehiculoComprado != null){
+            val frase = (activity as MainActivity).miViewModel.vehiculoComprado?.tipoVehiculo + ' ' +
+                    (activity as MainActivity).miViewModel.vehiculoComprado?.marcaVehiculo + ' ' +
+                    (activity as MainActivity).miViewModel.vehiculoComprado?.cilindradaVehiculo
+            //Muestro un Toast con los datos del vehículo comprado.
+            Toast.makeText(context,frase, Toast.LENGTH_SHORT).show()
+        }
+
         if((activity as MainActivity).miViewModel.usuario != null){
             binding.saludo.text = (activity as MainActivity).miViewModel.usuario?.nombre
         }
@@ -62,7 +70,7 @@ class FirstFragment : Fragment() {
 
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.menu_main, menu)
         return true
@@ -90,7 +98,7 @@ class FirstFragment : Fragment() {
     override fun onPrepareMenu(menu: Menu) {
         super.onPrepareMenu(menu)
         menu.findItem(R.id.miHola)?.isVisible=false
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

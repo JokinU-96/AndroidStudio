@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ej4.databinding.FragmentFourthBinding
 import com.example.ej4.databinding.FragmentThirdBinding
 import com.example.ej4.modelo.Vehiculo
 import com.example.ej4.recyclerView.Adaptador
+import java.lang.Double.parseDouble
+import java.lang.Integer.parseInt
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,23 +46,29 @@ class FourthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var posicion = arguments?.getInt("position") ?: -1
+        var posicion = arguments?.getInt("posicion") ?: -1
+        var vehiculo=(activity as MainActivity).miViewModel.vehiculos[0]
 
         if (posicion==-1) findNavController().popBackStack()
         else{
-            var vehiculo=(activity as MainActivity).miViewModel.vehiculos[posicion]
-            //binding.etTipo.setText(vehiculo.tipoVehiculo)
+            vehiculo=(activity as MainActivity).miViewModel.vehiculos[posicion]
+            binding.etTipo.setText(vehiculo.tipoVehiculo)
             binding.etCilindrada.setText(vehiculo.cilindradaVehiculo.toString())
             binding.etMarca.setText(vehiculo.marcaVehiculo)
         }
 
         binding.btnComprar.setOnClickListener{
-            comprar()
+            comprar(vehiculo)
         }
 
     }
 
-    fun comprar(){
+    fun comprar(vehiculo: Vehiculo){
+        var vehiculoComprado:Vehiculo = Vehiculo(vehiculo.tipoVehiculo , vehiculo.marcaVehiculo, vehiculo.cilindradaVehiculo )
+
+        (activity as MainActivity).miViewModel.vehiculoComprado = vehiculoComprado
+
+        findNavController().navigate(R.id.action_FourthFragment_to_FirstFragment)
     }
 
     override fun onDestroyView() {
