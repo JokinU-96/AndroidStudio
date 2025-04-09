@@ -54,6 +54,12 @@ class FirstFragment : Fragment() {
             }
         }
 
+        (activity as MainActivity).miViewModel.usuario?.let{
+            it?.let{
+                binding.saludo.text="Bienvenido@ ${it.nombre} ${it.apellidos}"
+            }
+        }
+
         if((activity as MainActivity).miViewModel.vehiculoComprado != null){
             val frase = (activity as MainActivity).miViewModel.vehiculoComprado?.tipoVehiculo + ' ' +
                     (activity as MainActivity).miViewModel.vehiculoComprado?.marcaVehiculo + ' ' +
@@ -93,9 +99,11 @@ class FirstFragment : Fragment() {
                 else -> false
             }
         }
-    },viewLifecycleOwner, Lifecycle.State.RESUMED)
+    },viewLifecycleOwner, Lifecycle.State.RESUMED)*/
 
-    override fun onPrepareMenu(menu: Menu) {
+
+
+    /*override fun onPrepareMenu(menu: Menu) {
         super.onPrepareMenu(menu)
         menu.findItem(R.id.miHola)?.isVisible=false
     }*/

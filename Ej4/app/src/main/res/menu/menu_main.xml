@@ -15,4 +15,9 @@
         android:orderInCategory="102"
         android:title="@string/volver"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="102"
+        android:title="@string/logout"
+        app:showAsAction="never"/>
 </menu>

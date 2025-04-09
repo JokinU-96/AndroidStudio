@@ -35,6 +35,17 @@ class MainActivity : AppCompatActivity() {
 
         datos = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
 
+        //Maider
+        /*datos.getString("nombre, """)
+            ?.let{nombre ->
+                datos.getString("apellido", "")?.let{
+                    apellido ->
+                    val usuario = Usuario(nombre, apellido, datos.getInt("edad", 0))
+                    miViewModel.usuario = usuario
+                }
+            }*/
+
+        //Jokin
         if(!datos.getString("nombre", "").isNullOrEmpty()){
             val usuarioPrecargado = Usuario(
                 datos.getString("nombre", "").toString(),
@@ -73,7 +84,20 @@ class MainActivity : AppCompatActivity() {
                 findNavController(R.id.nav_host_fragment_content_main).popBackStack()
                 true
             }
-            else -> false
+            R.id.action_logout -> {
+                miViewModel.usuario = null
+                val datos : SharedPreferences = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
+                val editor : SharedPreferences.Editor = datos.edit()
+                editor.putString("nombre", null)//Nombre
+                editor.putString("apellidos", null)//Apellidos
+                editor.putInt("edad", -1)
+                editor.apply()
+
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                //Borrar la pila de fragmentos
+                navController.popBackStack(R.id.FirstFragment, false)
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
