@@ -35,9 +35,12 @@ class SecondFragment : Fragment() {
 
 
         super.onViewCreated(view, savedInstanceState)
-        val editor: SharedPreferences.Editor =(activity as MainActivity).datos.edit()
+        val datos: SharedPreferences=(activity as MainActivity).getSharedPreferences("datos",Context.MODE_PRIVATE)
+        val editor = datos.edit()
 
         binding.etNombre.setText((activity as MainActivity).miViewModel.usuario?.nombre.toString())
+        binding.etApellidos.setText((activity as MainActivity).miViewModel.usuario?.apellidos.toString())
+        binding.etEdad.setText((activity as MainActivity).miViewModel.usuario?.edad.toString())
 
             binding.btnInsertar.setOnClickListener{
             try {
@@ -58,11 +61,16 @@ class SecondFragment : Fragment() {
                     val edad = edadText.toInt()
                     if (edad >= 16) {
                         var usuarioActual = Usuario(binding.etNombre.text.toString(), binding.etApellidos.text.toString(), edad)
+
                         (activity as MainActivity).miViewModel.usuario = usuarioActual
+
                         editor.putInt("edad", edad)
                         editor.putString("usario", binding.etNombre.text.toString())
                         editor.putString("apellidos", binding.etApellidos.text.toString())
+                        editor.apply()
+
                         findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+
                     } else {
                         Toast.makeText(context, "Debes ser mayor de edad para poder comprarte un coche en este concesionario.", Toast.LENGTH_SHORT)
                             .show()

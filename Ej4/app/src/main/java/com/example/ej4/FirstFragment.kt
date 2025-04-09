@@ -45,10 +45,10 @@ class FirstFragment : Fragment() {
         binding.btnInsertarDatos.setOnClickListener{
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+
         binding.btnComprar.setOnClickListener{
             if((activity as MainActivity).miViewModel.usuario == null) {
-                Toast.makeText(context, "Debes hacer el login antes de comprar un vehículo.", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(context, "Debes hacer el login antes de comprar un vehículo.", Toast.LENGTH_SHORT).show()
             } else {
                 findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
             }
