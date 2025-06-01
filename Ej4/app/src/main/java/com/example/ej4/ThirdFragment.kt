@@ -11,7 +11,7 @@ import androidx.core.view.forEach
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ej4.databinding.FragmentThirdBinding
-import com.example.ej4.modelo.Vehiculo
+import com.example.ej4.bbdd.Vehiculo
 import com.example.ej4.recyclerView.Adaptador
 
 
@@ -38,26 +38,17 @@ class ThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvVehiculos.layoutManager= LinearLayoutManager(context)
+        (activity as MainActivity).miViewModel.vehiculos.observe(activity as MainActivity){
 
-        if ((activity as MainActivity).miViewModel.usuario?.edad!! <= 18){
-            //Cargar solo las motos
-            val vehiculosParaMenores = mutableListOf<Vehiculo>()
-            (activity as MainActivity).miViewModel.vehiculos.filterTo(vehiculosParaMenores) { it.tipoVehiculo == "moto" }
-            binding.rvVehiculos.adapter= Adaptador(vehiculosParaMenores)
-        } else{
-            binding.rvVehiculos.adapter= Adaptador((activity as MainActivity).miViewModel.vehiculos)
+            if ((activity as MainActivity).miViewModel.usuario?.edad!! <= 18){
+                //Cargar solo las motos
+                val vehiculosParaMenores = mutableListOf<Vehiculo>()
+                (activity as MainActivity).miViewModel.vehiculos.value?.filterTo(vehiculosParaMenores) { it.tipoVehiculo == "moto" }
+                binding.rvVehiculos.adapter= Adaptador(vehiculosParaMenores)
+            } else{
+                binding.rvVehiculos.adapter= Adaptador(it)
+            }
         }
-
-//        binding.btnComprar.setOnClickListener{
-//            binding.llVehiculos.forEach { control ->
-//                if (control is CheckBox){
-//                    vehiculosComprados += "${control.text}\n"
-//                    (activity as MainActivity).usuario?.vehiculos?.add((activity as MainActivity).vehiculos.get(control.id))
-//                }
-//            }
-//
-//            Toast.makeText(context, vehiculosComprados, Toast.LENGTH_LONG).show()
-//        }
 
 
     }

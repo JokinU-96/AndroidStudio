@@ -3,14 +3,15 @@ package com.example.ej4.recyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.lifecycle.LiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ej4.R
 import com.example.ej4.ThirdFragment
-import com.example.ej4.modelo.Vehiculo
+import com.example.ej4.bbdd.Vehiculo
 import com.example.ej4.databinding.RecyclerviewVehiculoBinding
 
-class Adaptador(var vehiculos: MutableList<Vehiculo>):RecyclerView.Adapter<Adaptador.VehiculoVH>(){
+class Adaptador(var vehiculos: List<Vehiculo>):RecyclerView.Adapter<Adaptador.VehiculoVH>(){
     inner class VehiculoVH(val binding: RecyclerviewVehiculoBinding): RecyclerView.ViewHolder(binding.root){
         //Aquí dentro pongo un listener para configurar la acción de los botones.
         var posicion: Int = 0

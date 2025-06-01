@@ -17,17 +17,19 @@ import androidx.lifecycle.ViewModel
 import com.example.ej4.databinding.ActivityMainBinding
 import com.example.ej4.modelo.Usuario
 import com.example.ej4.modelo.VM
-import com.example.ej4.modelo.Vehiculo
+import com.example.ej4.bbdd.Vehiculo
+import com.example.ej4.modelo.VehiculoViewModelFactory
+import com.example.kopa.bbdd.Repositorio
+import com.example.kopa.bbdd.bbdd
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    //var usuario: Usuario? = null
-    //var vehiculos: MutableList<Vehiculo> = mutableListOf()
-
-    val miViewModel: VM by viewModels()
+    val miDataBase by lazy { bbdd.getDatabase(this) }
+    val miRepositorio by lazy { Repositorio( miDataBase.miDAO() ) }
+    val miViewModel : VM by viewModels{ VehiculoViewModelFactory(miRepositorio) }
 
     lateinit var datos:SharedPreferences
 
@@ -36,31 +38,31 @@ class MainActivity : AppCompatActivity() {
         datos = this.getSharedPreferences("datos", Context.MODE_PRIVATE)
 
         //Maider
-        /*datos.getString("nombre, """)
+        datos.getString("nombre", "")
             ?.let{nombre ->
                 datos.getString("apellido", "")?.let{
                     apellido ->
-                    val usuario = Usuario(nombre, apellido, datos.getInt("edad", 0))
+                    val usuario = Usuario(datos.getString("nombre", "").toString(), datos.getString("apellidos", "").toString(), datos.getInt("edad", 0))
                     miViewModel.usuario = usuario
                 }
-            }*/
+            }
 
         //Jokin
-        if(!datos.getString("nombre", "").isNullOrEmpty()){
+        /*if(!datos.getString("nombre", "").isNullOrEmpty()){
             val usuarioPrecargado = Usuario(
                 datos.getString("nombre", "").toString(),
                 datos.getString("apellidos", "").toString(),
                 datos.getInt("edad", 0)
             )
             miViewModel.usuario = usuarioPrecargado
-        }
+        }*/
 
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        miViewModel.insertarVehiculos()
+        miViewModel.mostrarVehiculos()
 
         setSupportActionBar(binding.toolbar)
 

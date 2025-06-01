@@ -13,6 +13,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.ej4.databinding.FragmentFirstBinding
 
@@ -39,8 +42,6 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val menuHost: MenuHost = requireActivity()
 
         binding.btnInsertarDatos.setOnClickListener{
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
@@ -72,42 +73,32 @@ class FirstFragment : Fragment() {
             binding.saludo.text = (activity as MainActivity).miViewModel.usuario?.nombre
         }
 
-    }
+        //Añado un menú personalizado para la pantalla de la lista de bebidas.
+        val menuHost: MenuHost = requireActivity()
 
-
-
-    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    val menuHost: MenuHost = requireActivity()
-
-    menuHost.addMenuProvider(object: MenuProvider {
-        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        // Add menu items here
-            menuInflater.inflate(R.menu.menu_fragment1, menu)
-        }
-        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        // Handle the menu selection
-            return when (menuItem.itemId) {
-                R.id.saludo -> {
-                    Toast.makeText(context, "Hola", Toast.LENGTH_LONG).show()
-                    true
-                }
-                else -> false
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater){
+                menuInflater.inflate(R.menu.menu_fragment1, menu)
             }
-        }
-    },viewLifecycleOwner, Lifecycle.State.RESUMED)*/
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.insertarDatos -> {
+                        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                        true // Indicate that the event has been handled
+                    }
+                    R.id.comprar -> {
+                        findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
+                        true
+                    }
+                    else -> false // Return false for unhandled items, allowing other MenuProviders to handle them
+                }
+                return true
+            }
+
+        },viewLifecycleOwner, Lifecycle.State.RESUMED)
 
 
-
-    /*override fun onPrepareMenu(menu: Menu) {
-        super.onPrepareMenu(menu)
-        menu.findItem(R.id.miHola)?.isVisible=false
-    }*/
-
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

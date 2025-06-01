@@ -1,20 +1,44 @@
 package com.example.ej4.modelo
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.ej4.MainActivity
+import com.example.ej4.bbdd.Vehiculo
+import com.example.kopa.bbdd.Repositorio
+import kotlinx.coroutines.launch
 
-class VM:ViewModel() {
-    var vehiculos: MutableList<Vehiculo> = mutableListOf()
+class VM(private val miRepositorio : Repositorio):ViewModel() {
+    var vehiculos: LiveData<List<Vehiculo>> = miRepositorio.mostrarVehiculos().asLiveData()
     var usuario: Usuario? = null
 
     var vehiculoComprado: Vehiculo? = null
 
-    fun insertarVehiculos(){
-        vehiculos.add(Vehiculo("moto", "Dukati", 1250.00))
-        vehiculos.add(Vehiculo("moto", "Kawasaki", 890.00))
-        vehiculos.add(Vehiculo("moto", "BMW", 980.00))
-        vehiculos.add(Vehiculo("coche", "Nissan", 2500.00))
-        vehiculos.add(Vehiculo("coche", "Renault", 9800.00))
-        vehiculos.add(Vehiculo("coche", "Peugeot", 15000.00))
+    fun mostrarVehiculos() = viewModelScope.launch{
+        vehiculos = miRepositorio.mostrarVehiculos().asLiveData()
     }
+
+    fun insertar(miVehiculo: Vehiculo) =viewModelScope.launch{
+        miRepositorio.insertar(miVehiculo)
+    }
+    fun borrar(miVehiculo: Vehiculo) =viewModelScope.launch{
+        miRepositorio.borrar(miVehiculo)
+    }
+    fun modificar(miVehiculo: Vehiculo) =viewModelScope.launch{
+        miRepositorio.modificar(miVehiculo)
+    }
+}
+
+class VehiculoViewModelFactory(private val miRepositorio: Repositorio): ViewModelProvider.Factory{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(com.example.ej4.modelo.VM::class.java)){
+            @Suppress("UNCHECKED_CAST")
+            return VM(miRepositorio) as T
+        }
+        throw IllegalArgumentException("ViewModel class desconocida")
+    }
+
 }

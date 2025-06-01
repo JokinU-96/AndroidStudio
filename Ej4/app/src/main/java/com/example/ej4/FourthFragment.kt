@@ -3,14 +3,21 @@ package com.example.ej4
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ej4.databinding.FragmentFourthBinding
 import com.example.ej4.databinding.FragmentThirdBinding
-import com.example.ej4.modelo.Vehiculo
+import com.example.ej4.bbdd.Vehiculo
+import com.example.ej4.modelo.Usuario
 import com.example.ej4.recyclerView.Adaptador
 import java.lang.Double.parseDouble
 import java.lang.Integer.parseInt
@@ -47,26 +54,73 @@ class FourthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var posicion = arguments?.getInt("posicion") ?: -1
-        var vehiculo=(activity as MainActivity).miViewModel.vehiculos[0]
+        (activity as MainActivity).miViewModel.vehiculos.observe(viewLifecycleOwner) {
+            vehiculos ->
 
-        if (posicion==-1) findNavController().popBackStack()
-        else{
-            vehiculo=(activity as MainActivity).miViewModel.vehiculos[posicion]
-            binding.etTipo.setText(vehiculo.tipoVehiculo)
-            binding.etCilindrada.setText(vehiculo.cilindradaVehiculo.toString())
-            binding.etMarca.setText(vehiculo.marcaVehiculo)
-        }
+            if (posicion==-1) findNavController().popBackStack()
+            else{
+                var vehiculo = vehiculos[posicion]
 
-        binding.btnComprar.setOnClickListener{
-            comprar(vehiculo)
+                binding.etTipo.setText(vehiculo.tipoVehiculo)
+                binding.etCilindrada.setText(vehiculo.cilindradaVehiculo.toString())
+                binding.etMarca.setText(vehiculo.marcaVehiculo)
+
+                binding.btnComprar.setOnClickListener{
+                    comprar(vehiculo)
+                }
+            }
+
+
         }
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater){
+                menuInflater.inflate(R.menu.menu_fragment4, menu)
+            }
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.comprar -> {
+                        var posicion = arguments?.getInt("posicion") ?: -1
+                        (activity as MainActivity).miViewModel.vehiculos.observe(viewLifecycleOwner) {
+                                vehiculos ->
+
+                            if (posicion==-1) findNavController().popBackStack()
+                            else{
+                                var vehiculo = vehiculos[posicion]
+
+                                binding.etTipo.setText(vehiculo.tipoVehiculo)
+                                binding.etCilindrada.setText(vehiculo.cilindradaVehiculo.toString())
+                                binding.etMarca.setText(vehiculo.marcaVehiculo)
+
+                                binding.btnComprar.setOnClickListener{
+                                    comprar(vehiculo)
+                                }
+                            }
+                        }
+                        true
+                    }
+                    else -> false // Return false for unhandled items, allowing other MenuProviders to handle them
+                }
+                return true
+            }
+
+            private fun comprar(vehiculo: Vehiculo) {
+                (activity as MainActivity).miViewModel.vehiculoComprado = vehiculo
+
+                findNavController().navigate(R.id.action_FourthFragment_to_FirstFragment)
+            }
+
+        },viewLifecycleOwner, Lifecycle.State.RESUMED)
+
 
     }
 
-    fun comprar(vehiculo: Vehiculo){
-        var vehiculoComprado:Vehiculo = Vehiculo(vehiculo.tipoVehiculo , vehiculo.marcaVehiculo, vehiculo.cilindradaVehiculo )
 
-        (activity as MainActivity).miViewModel.vehiculoComprado = vehiculoComprado
+
+    fun comprar(vehiculo: Vehiculo){
+
+        (activity as MainActivity).miViewModel.vehiculoComprado = vehiculo
 
         findNavController().navigate(R.id.action_FourthFragment_to_FirstFragment)
     }
